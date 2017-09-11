@@ -36,8 +36,8 @@ def token():
 	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/InvokeAPI"
 
 	headers = {
-    	'username': "",
-    	'password': "",
+    	'username': "c-130769",
+    	'password': "D2C30£9fe1^0C0B`2f8b",
     	
     	}
 
@@ -60,35 +60,55 @@ def token():
 #calling token function to get token
 token()	
 
-### example project search date inout manually grabs token from token()
-url = "http://cordellprojectsapi.cordell.com.au/api/Projects/ProjectGetAllData"
+##example project search date inout manually grabs token from token()
+def getprojectsdate():	
+	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/ProjectGetAllData"
 
-querystring = {"FROMDATE":"10/08/2017","TODATE":"11/08/2017"}
+	querystring = {"FROMDATE":"10/08/2017","TODATE":"11/08/2017"}
 
-headers = {
-    'token': finaltoken,
+	headers = {
+    	'token': finaltoken,
     
   
     }
 
-response = requests.request("POST", url, headers=headers, params=querystring)
+	response = requests.request("POST", url, headers=headers, params=querystring)
 
-resultraw = (response.text)
-print "Result Raw Response:",resultraw
-print "Type Result Raw response",type(resultraw)
-resultrawstring = str(resultraw)
-print resultrawstring
-print type(resultrawstring)
+	resultraw = (response.text)
+	print "Result Raw Response:",resultraw
+	print "Type Result Raw response",type(resultraw)
+	resultrawstring = str(resultraw)
+	print resultrawstring
+	print type(resultrawstring)
 
-#makine string into soup and speicify its xml
-souprawresult = BeautifulSoup(resultrawstring, 'xml')
+	#makine string into soup and speicify its xml
+	souprawresult = BeautifulSoup(resultrawstring, 'xml')
 	
-#print type of souop
-print "soup type",type(souprawresult)
+	#print type of souop
+	print "soup type",type(souprawresult)
 
-#gets just project names
-projectnames = souprawresult.find_all('PROJ_TITLE')
-print projectnames
+	#gets just project names
+	projectnames = souprawresult.find_all('PROJ_TITLE')
+	print projectnames
+	print type(projectnames)
 
-new_entry = Project(city='chatswood', location='', Project_ID='222', Project_Title='My project', Project_Type="Commerical", Project_Post="2067", Project_Suburb="Chatwood", Project_State="NSW",Project_Stage="Early",Project_Category="office",PROJ_STATUST_DESC="proceeding",PROJ_START_DATE_DETAIL="13081995",PROJ_END_DATE_DETAIL="14081999",PROJ_VALUE="1000000",PROJ_VALUE_DESC="1 million",PROJ_DETAIL_TEXT="Building an Office")
-new_entry.save()
+#	gets just the text without tags
+#	for proj in projectnames:
+#	print proj.text
+
+	#gets all projects in soup
+	projectz = souprawresult.find_all('PROJECT')
+	print projectz
+	print type(projectz)
+	
+	for pro in projectz:
+		print pro.PROJ_ADDRESS1
+
+	#testing add entry working
+	#new_entry = Project(city='chatswood', location='', Project_ID='', Project_Title='My project', Project_Type="Commerical", Project_Post="2067", Project_Suburb="Chatwood", Project_State="NSW",Project_Stage="Early",Project_Category="office",PROJ_STATUST_DESC="proceeding",PROJ_START_DATE_DETAIL="13081995",PROJ_END_DATE_DETAIL="14081999",PROJ_VALUE="1000000",PROJ_VALUE_DESC="1 million",PROJ_DETAIL_TEXT="Building an Office")
+	#new_entry.save()
+
+#run function for testing
+getprojectsdate()
+
+
