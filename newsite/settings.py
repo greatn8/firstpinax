@@ -133,9 +133,11 @@ INSTALLED_APPS = [
     "account",
     "pinax.eventlog",
     "pinax.webanalytics",
+    
 
     # project
     "newsite",
+    "location_field.apps.DefaultConfig",
 ]
 
 # A sample logging configuration. The only tangible logging

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 #! /usr/bin/env python
+
+#this fixed app not installed error?!
 import os,sys
 def setup_environment():
  pathname = os.path.dirname(sys.argv[0])
@@ -11,6 +13,7 @@ setup_environment()
 
 import django
 django.setup()
+###
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -33,8 +36,8 @@ def token():
 	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/InvokeAPI"
 
 	headers = {
-    	'username': "removed",
-    	'password': "removed",
+    	'username': "",
+    	'password': "",
     	
     	}
 
@@ -87,5 +90,5 @@ print "soup type",type(souprawresult)
 projectnames = souprawresult.find_all('PROJ_TITLE')
 print projectnames
 
-new_entry = Project(city='chatswood', Project_ID='222', Project_Title='My project', Project_Type="Commerical", Project_Post="2067", Project_Suburb="Chatwood", Project_State="NSW",Project_Stage="Early",Project_Category="office",PROJ_STATUST_DESC="proceeding",PROJ_START_DATE_DETAIL="13081995",PROJ_END_DATE_DETAIL="14081999",PROJ_VALUE="1000000",PROJ_VALUE_DESC="1 million",PROJ_DETAIL_TEXT="Building an Office")
+new_entry = Project(city='chatswood', location='', Project_ID='222', Project_Title='My project', Project_Type="Commerical", Project_Post="2067", Project_Suburb="Chatwood", Project_State="NSW",Project_Stage="Early",Project_Category="office",PROJ_STATUST_DESC="proceeding",PROJ_START_DATE_DETAIL="13081995",PROJ_END_DATE_DETAIL="14081999",PROJ_VALUE="1000000",PROJ_VALUE_DESC="1 million",PROJ_DETAIL_TEXT="Building an Office")
 new_entry.save()

@@ -8,8 +8,9 @@ class Project(models.Model):
 	#camewutg maps package
     city = models.CharField(max_length=255)
     location = PlainLocationField(based_fields=['city'], zoom=7)
-    #added by me
-    Project_ID = models.IntegerField(blank=False, null=True)
+
+   
+    Project_ID = models.IntegerField(blank=False, primary_key=True)
     Project_Title = models.CharField(max_length=120, blank=False, null=True)
     Project_Type = models.CharField(max_length=120, blank=False, null=True)
     Project_Post = models.CharField(max_length=120, blank=False, null=True)
