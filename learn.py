@@ -37,7 +37,7 @@ def token():
 
 	headers = {
     	'username': "c-130769",
-    	'password': "D2C30£9fe1^0C0B`2f8b",
+    	'password': "",
     	
     	}
 
@@ -102,11 +102,56 @@ def getprojectsdate():
 	print type(projectz)
 	
 	for pro in projectz:
-		print pro.PROJ_ADDRESS1
 
-	#testing add entry working
-	#new_entry = Project(city='chatswood', location='', Project_ID='', Project_Title='My project', Project_Type="Commerical", Project_Post="2067", Project_Suburb="Chatwood", Project_State="NSW",Project_Stage="Early",Project_Category="office",PROJ_STATUST_DESC="proceeding",PROJ_START_DATE_DETAIL="13081995",PROJ_END_DATE_DETAIL="14081999",PROJ_VALUE="1000000",PROJ_VALUE_DESC="1 million",PROJ_DETAIL_TEXT="Building an Office")
-	#new_entry.save()
+		city = pro.PROJ_ADDRESS1.string
+		print pro.PROJ_ADDRESS1
+		print "type",type(city)
+
+		projectid = pro.PROJ_PROJECT_ID.string
+		print pro.PROJ_PROJECT_ID
+		
+		projecttitle = pro.PROJ_TITLE.string
+		print pro.PROJ_TITLE
+		
+		projectcipher = pro.PROJ_CAT1_TYPE_DESC.string
+		print pro.PROJ_CAT1_TYPE_DESC
+
+		projectpost = pro.PROJ_POSTCODE.string
+		print pro.PROJ_POSTCODE
+		
+		projectsub = pro.PROJ_SUBURB.string
+		print pro.PROJ_SUBURB
+
+		projectstate = pro.PROJ_STATE_CODE.string
+		print pro.PROJ_STATE_CODE
+		
+		projectstage = pro.PROJ_STAGE_DESC.string
+		print pro.PROJ_STAGE_DESC
+		
+		projectcat = pro.PROJ_CAT1_DESC.string
+		print pro.PROJ_CAT1_DESC
+
+		projectstatus = pro.PROJ_STATUS_DESC.string
+		print pro.PROJ_STATUS_DESC
+
+		projectstart = pro.PROJ_START_DATE_DETAIL.string
+		print pro.PROJ_START_DATE_DETAIL
+
+		projectend = pro.PROJ_END_DATE_DETAIL.string
+		print pro.PROJ_END_DATE_DETAIL
+		
+		projectvalue = float(pro.PROJ_VALUE.string)
+		print pro.PROJ_VALUE
+
+		projectvaldes= pro.PROJ_VALUE_DESC.string
+		print pro.PROJ_VALUE_DESC
+
+		projecttxt = pro.PROJ_DETAIL_TEXT.string
+		print pro.PROJ_DETAIL_TEXT
+
+		#add entry 
+		new_entry = Project(city=city, location='', Project_ID=projectid, Project_Title=projecttitle, Project_Type=projectcipher, Project_Post=projectpost, Project_Suburb=projectsub, Project_State=projectstate,Project_Stage=projectstage,Project_Category=projectcat,PROJ_STATUST_DESC=projectstatus,PROJ_START_DATE_DETAIL=projectstart,PROJ_END_DATE_DETAIL=projectend,PROJ_VALUE=projectvalue,PROJ_VALUE_DESC=projectvaldes,PROJ_DETAIL_TEXT=projecttxt)
+		new_entry.save()
 
 #run function for testing
 getprojectsdate()
