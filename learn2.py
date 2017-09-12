@@ -77,11 +77,15 @@ def getprojectsdate():
 
 	response = requests.request("POST", url, headers=headers, params=querystring)
 	resultraw = (response.text)
+	print "Result Raw Response:",resultraw
 	print "Type Result Raw response",type(resultraw)
 
 	resultrawstring = resultraw.encode('utf-8') # unicode to str
 
 	#resultrawstring = str(resultraw)
+	
+	print resultrawstring
+	print type(resultrawstring)
 
 	#makine string into soup and speicify its xml
 	souprawresult = BeautifulSoup(resultrawstring, 'xml')
@@ -98,73 +102,3 @@ def getprojectsdate():
 	projectz = souprawresult.find_all('PROJECT')
 	print projectz
 	print type(projectz)
-	
-	#for eaach project get each field we want
-	for pro in projectz:
-
-		city = pro.PROJ_ADDRESS1.string
-		print pro.PROJ_ADDRESS1
-		print "type",type(city)
-
-		projectid = pro.PROJ_PROJECT_ID.string
-		print pro.PROJ_PROJECT_ID
-		
-		projecttitle = pro.PROJ_TITLE.string
-		print pro.PROJ_TITLE
-		
-		projectcipher = pro.PROJ_CAT1_TYPE_DESC.string
-		print pro.PROJ_CAT1_TYPE_DESC
-
-		projectpost = pro.PROJ_POSTCODE.string
-		print pro.PROJ_POSTCODE
-		
-		projectsub = pro.PROJ_SUBURB.string
-		print pro.PROJ_SUBURB
-
-		projectstate = pro.PROJ_STATE_CODE.string
-		print pro.PROJ_STATE_CODE
-		
-		projectstage = pro.PROJ_STAGE_DESC.string
-		print pro.PROJ_STAGE_DESC
-		
-		projectcat = pro.PROJ_CAT1_DESC.string
-		print pro.PROJ_CAT1_DESC
-
-		projectstatus = pro.PROJ_STATUS_DESC.string
-		print pro.PROJ_STATUS_DESC
-
-
-		#my solution solution to get in right format dd-mm-yyyy from dd/mm/yy! :)
-		projectsta = pro.PROJ_START_DATE_DETAIL.string
-		projectstar2 = projectsta[:6] + '20' + projectsta[-2:]
-		projectstart = datetime.datetime.strptime(projectstar2, "%d/%m/%Y").strftime("%Y-%m-%d")
-		print pro.PROJ_START_DATE_DETAIL
-		
-		#my solution to get in right format dd-mm-yyyy from dd/mm/yy! :)
-		projecten1 = pro.PROJ_END_DATE_DETAIL.string
-		#solve no end date throwing error
-		if projecten1 == None:
-			projectend = "2999-12-12"
-		else:	
-			projecten2 = projecten1[:6] + '20' + projecten1[-2:]
-			projectend = datetime.datetime.strptime(projecten2, "%d/%m/%Y").strftime("%Y-%m-%d")
-			print pro.PROJ_END_DATE_DETAIL
-
-		projectvalue = float(pro.PROJ_VALUE.string)
-		print pro.PROJ_VALUE
-
-		projectvaldes= pro.PROJ_VALUE_DESC.string
-		print pro.PROJ_VALUE_DESC
-
-		projecttxt = pro.PROJ_DETAIL_TEXT.string
-		print pro.PROJ_DETAIL_TEXT
-
-		#add entry with each field in our database being populated from previous
-		new_entry = Project(city=city, location='', Project_ID=projectid, Project_Title=projecttitle, Project_Type=projectcipher, Project_Post=projectpost, Project_Suburb=projectsub, Project_State=projectstate,Project_Stage=projectstage,Project_Category=projectcat,PROJ_STATUST_DESC=projectstatus,PROJ_START_DATE_DETAIL=projectstart,PROJ_END_DATE_DETAIL=projectend,PROJ_VALUE=projectvalue,PROJ_VALUE_DESC=projectvaldes,PROJ_DETAIL_TEXT=projecttxt)
-		#save the entry
-		new_entry.save()
-
-#run function for testing
-getprojectsdate()
-
-
