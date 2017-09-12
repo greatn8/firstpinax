@@ -3,6 +3,8 @@
 
 #this fixed app not installed error?!
 import os,sys
+import datetime
+
 def setup_environment():
  pathname = os.path.dirname(sys.argv[0])
  sys.path.append(os.path.abspath(pathname))
@@ -134,12 +136,20 @@ def getprojectsdate():
 		projectstatus = pro.PROJ_STATUS_DESC.string
 		print pro.PROJ_STATUS_DESC
 
-		projectstart = pro.PROJ_START_DATE_DETAIL.string
-		print pro.PROJ_START_DATE_DETAIL
+		projectstar1 = pro.PROJ_START_DATE_DETAIL.string
+		#my solution solution to get in right format dd-mm-yyyy from dd/mm/yy! :)
+		projectstar2 = projectstar1[:6] + '20' + projectstar1[-2:]
 
-		projectend = pro.PROJ_END_DATE_DETAIL.string
-		print pro.PROJ_END_DATE_DETAIL
 		
+		print pro.PROJ_START_DATE_DETAIL
+		projectstart = datetime.datetime.strptime(projectstar2, "%d/%m/%Y").strftime("%Y-%m-%d")
+
+		projecten1 = pro.PROJ_END_DATE_DETAIL.string
+		#my solution to get in right format dd-mm-yyyy from dd/mm/yy! :)
+		projecten2 = projecten1[:6] + '20' + projectstar1[-2:]
+		print pro.PROJ_END_DATE_DETAIL
+		projectend = datetime.datetime.strptime(projecten2, "%d/%m/%Y").strftime("%Y-%m-%d")
+
 		projectvalue = float(pro.PROJ_VALUE.string)
 		print pro.PROJ_VALUE
 
