@@ -74,7 +74,7 @@ STATICFILES_FINDERS = [
 ]
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = "(-^=%xu84y&nl4s4_+3(ewnh@@00k$48p90-efoil455=#g(8$"
+SECRET_KEY = "d1v56$7hl6vra_3y+#5+%lf2q&2io(xb*zz&2w(lfme@y6tj23"
 
 TEMPLATES = [
     {
@@ -133,11 +133,10 @@ INSTALLED_APPS = [
     "account",
     "pinax.eventlog",
     "pinax.webanalytics",
-    
 
     # project
     "newsite",
-    "location_field.apps.DefaultConfig",
+    "location_field.apps.DefaultConfig"
 ]
 
 # A sample logging configuration. The only tangible logging
