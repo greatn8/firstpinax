@@ -38,8 +38,8 @@ def token():
 	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/InvokeAPI"
 
 	headers = {
-    	'username': "c-130769",
-    	'password': "vnN#QNth$DRxWSq3q8f#",
+    	'username': "",
+    	'password': "",
     	
     	}
 

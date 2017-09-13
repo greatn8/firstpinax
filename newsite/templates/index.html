@@ -3,6 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>My SIte Title</title>
+	{% if graph %}
+<div style="width:600;height:500">
+{{ graph|safe }}
+</div>
+{% endif %}
 </head>
 <body>
 	<h1>My SITE</h1>
