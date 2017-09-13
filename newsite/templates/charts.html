@@ -1,29 +1,25 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js
+'></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
 {% extends "site_base.html" %}
+
+
 
 {% load i18n %}
 
 {% block head_title %}pinax-project-account{% endblock %}
 
 {% block body_class %}home{% endblock %}
-<script>
-var endpoint = '/api/chart/data/' // url api 
 
-$.ajax({
-    method: "GET",
-    url: endpoint
-    success: function(data){
-        console.log("working!!!!!!!!!!!!")
-        console.log(data)
-    },
-    error: function(error_data){
-        console.log("error")
-        console.log(error_data)
-    }
-})
+
+<script>
+
+
 </script>
 {% block body_base %}
     <section class="jumbotron">
-        <div class="container" url-endpoint='{% url "api-data" %}'>
+        <div class="container">
             {% include "_messages.html" %}
             <h1>{% blocktrans %}Welcome to<br>pinax-project-account{% endblocktrans %}</h1>
             <p>
@@ -42,7 +38,79 @@ $.ajax({
         </div>
     </section>
     <section>
-        <div class="container">
+        <div class="container" url-endpoint='{% url "api-data" %}'>
+
+            <canvas id="ChartView" width="400" height="400"></canvas>
+            <script>
+            console.log('hi')
+            console.log('hi')
+            console.log('hi')
+            console.log('hi')
+
+
+            </script>
+            <div id="demo">
+            <h2>The XMLHttpRequest Object</h2>
+            <button type="button" onclick="loadDoc()">Change Content</button>
+            </div>
+
+            <script>
+            
+            {% block jquery %}
+            var endpoint = '/api/chart/data/' // url api 
+
+            $.ajax({
+                method: "GET",
+                url: endpoint,
+                success: function(data){
+                    console.log("working!!!!!!!!!!!!")
+                    console.log(data)
+                },
+                error: function(error_data){
+                    console.log("error")
+                    console.log(error_data)
+                }
+            })
+
+            var ctx = document.getElementById("ChartView").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+            {% endblock %}
+            </script>
             <h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2>
             <p class="lead">
                 {% blocktrans %}

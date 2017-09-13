@@ -35,6 +35,13 @@ def index(request):
 def ChartView(request):
 		return render(request, 'charts.html')
 
+def get_data(request, *args, **kwargs):
+		data = {
+			"Sales": 100,
+			"customers" : 10,
+		}
+		return JsonResponse(data)
+
 class ChartData(APIView):
 	authentication_classes = []
 	permission_classes = []
