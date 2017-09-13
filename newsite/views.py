@@ -17,13 +17,6 @@ from newsite.models import Project
 
 def index(request):
 
-	myurl = "https://abr.business.gov.au/abrxmlsearchRPC/AbrXmlSearch.asmx/SearchByABNv201408?searchString=74172177893&includeHistoricalDetails=N&authenticationGuid=62301559-37d7-4505-8a1d-1c429ff09e63"
-	myurl2= urllib2.Request(myurl)
-	final = myurl2
-	openermybet = urllib2.build_opener()	
-
-	f2 = openermybet.open(myurl2)
-	content2 = f2.read()
 
 	return render(request, 'index.html')
 
@@ -42,6 +35,7 @@ def get_data(request, *args, **kwargs):
 		}
 		return JsonResponse(data)
 
+#chartdata view no template.html required -->  see url
 class ChartData(APIView):
 	authentication_classes = []
 	permission_classes = []
@@ -52,5 +46,7 @@ class ChartData(APIView):
 			"customers" : 10,
 			#gets count of pbject in Project model
 			"projects": Project.objects.count(),
-		}
+			"projectsQLD": Project.objects.all().filter(Project_State="QLD").count(),
+			"projectsNSW": Project.objects.all().filter(Project_State="NSW").count()
+		}	
 		return Response(data)

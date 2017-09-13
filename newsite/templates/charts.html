@@ -38,7 +38,8 @@
         </div>
     </section>
     <section>
-        <div class="container" url-endpoint='{% url "api-data" %}'>
+        <!-- removed div class attribute url-endpoint='{% url "api-data" %}' as didnt know what it did and everything fucntions without-->
+        <div class="container">
 
             <canvas id="ChartView" width="400" height="400"></canvas>
             <script>
@@ -46,19 +47,12 @@
             console.log('hi')
             console.log('hi')
             console.log('hi')
-
-
-            </script>
-            <div id="demo">
-            <h2>The XMLHttpRequest Object</h2>
-            <button type="button" onclick="loadDoc()">Change Content</button>
-            </div>
-
-            <script>
             
+            // ajax to get json data from api
             {% block jquery %}
             var endpoint = '/api/chart/data/' // url api 
-
+            //initilise empty array (list in python)
+            var defaultData = []
             $.ajax({
                 method: "GET",
                 url: endpoint,
@@ -72,6 +66,7 @@
                 }
             })
 
+            // Chart.js graph
             var ctx = document.getElementById("ChartView").getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -79,7 +74,7 @@
                     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
                     datasets: [{
                         label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
+                        data: defaultData,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
