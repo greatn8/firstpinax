@@ -64,6 +64,9 @@
                 success: function(data){
                     labels = data.labels
                     defaultData = data.default
+                    labelsqldcom17 = data.labelsqldcom17
+                    QLDCommence17 = data.QLDCommence17
+
                     // should make this into fucntion setChart() to be called later
                     var myChart = new Chart(ctx, {
                     type: 'bar',
@@ -140,10 +143,10 @@
                     var myChart = new Chart(ctx3, {
                     type: 'polarArea',
                     data: {
-                        labels: labels,
+                        labels: labelsqldcom17,
                         datasets: [{
                             label: '# of Votes',
-                            data: defaultData,
+                            data: QLDCommence17,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
