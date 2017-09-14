@@ -2,6 +2,7 @@ from django.shortcuts import render
 import django.views.generic
 from django.http import HttpResponse
 import urllib2
+import datetime 
 
 #for plot.ly
 import plotly.plotly as py
@@ -41,12 +42,22 @@ class ChartData(APIView):
 	permission_classes = []
 
 	def get(self, request, format=None):
+		#provide label data for label field below
+		QLD_count = Project.objects.all().filter(Project_State="QLD").count()
+		labels = ["QLD Projects", "Blue", "Yellow", "Green", "Purple", "Orange"]
+		default_items = [QLD_count, 500, 654, 343, 455, 600 ]
+		#data to return in json format
 		data = {
-			"Sales": 100,
-			"customers" : 10,
+			"labels": labels,
+			"default": default_items,
 			#gets count of pbject in Project model
 			"projects": Project.objects.count(),
+			#count all projecst in QLD
 			"projectsQLD": Project.objects.all().filter(Project_State="QLD").count(),
-			"projectsNSW": Project.objects.all().filter(Project_State="NSW").count()
+			#count all projects in NSW
+			"projectsNSW": Project.objects.all().filter(Project_State="NSW").count(),
+			"projectsVIC": Project.objects.all().filter(Project_State="VIC").count(),
+			#projectsstarting month and state can be modified with more filters
+			"ProjectsQLDstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-09-01', PROJ_START_DATE_DETAIL__gt='2017-07-01',Project_State="QLD").count(),
 		}	
 		return Response(data)
