@@ -1,15 +1,211 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>My SIte Title</title>
-	{% if graph %}
-<div style="width:600;height:500">
-{{ graph|safe }}
-</div>
-{% endif %}
-</head>
-<body>
-	<h1>My SITE</h1>
-</body>
-</html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js
+'></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+{% extends "site_base.html" %}
+
+
+
+{% load i18n %}
+
+{% block head_title %}pinax-project-account{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+
+<script>
+
+
+</script>
+{% block body_base %}
+    <section>
+        <div class="container">
+            {% include "_messages.html" %}
+            <h1>{% blocktrans %}Members Area<br>{% endblocktrans %}</h1>
+            <p>
+                {% blocktrans %}
+                
+                {% endblocktrans %}
+            </p>
+            {% if not user.is_authenticated %}
+            {% url "account_login" as login_url %}
+            {% url "account_signup" as signup_url %}
+            <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p>
+            {% endif %}
+        </div>
+    </section>
+    <section>
+        <!-- removed div class attribute url-endpoint='{% url "api-data" %}' as didnt know what it did and everything fucntions without-->
+        <div class="container">
+            <h2 class="text-center">{% blocktrans %}Available Charts{% endblocktrans %}</h2>
+            <h3><u><b>QLD</b></u></h3>
+            <h3><a href="/index">Chart1</a></h3>
+            <canvas id="ChartView" width="400" height="400"></canvas>
+            <!--chart 2-->
+            <canvas id="ChartView2" width="400" height="400"></canvas>
+            <canvas id="ChartView3" width="400" height="400"></canvas>
+            <script>
+            console.log('hi')
+            console.log('hi')
+            console.log('hi')
+            console.log('hi')
+            
+            // ajax to get json data from api
+            {% block jquery %}
+            var endpoint = '/api/chart/data/' // url api 
+            //initilise empty array (list in python) this gets put into var myChart data: 
+            var defaultData = []
+            var labels = []
+            //main ajax call
+            $.ajax({
+                method: "GET",
+                url: endpoint,
+                //data is the response data here
+                success: function(data){
+                    labels = data.labels
+                    defaultData = data.default
+                    // should make this into fucntion setChart() to be called later
+                    var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '# of Votes',
+                            data: defaultData,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)', 
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+                    var myChart = new Chart(ctx2, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '# of Votes',
+                            data: defaultData,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)', 
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+                    var myChart = new Chart(ctx3, {
+                    type: 'polarArea',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '# of Votes',
+                            data: defaultData,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)', 
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+                        console.log("working!!!!!!!!!!!!")
+                        console.log(data)
+                    },
+                    error: function(error_data){
+                        console.log("error")
+                        console.log(error_data)
+                    }
+                })
+            //function for chart run in success call
+            function setChart(){
+
+
+            }
+            // Chart.js graph
+            var ctx = document.getElementById("ChartView").getContext('2d');
+            //chart2
+            var ctx2 = document.getElementById("ChartView2").getContext('2d');
+            //chart3
+            var ctx3 = document.getElementById("ChartView3").getContext('2d');
+
+            {% endblock %}
+            </script>
+            <h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2>
+            
+    </section>
+    <section>
+        <div class="container">
+            <p class="lead text-center">
+                {% blocktrans %}
+                See <a href="http://pinaxproject.com/">pinaxproject.com</a>
+                for more information.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </section>
+{% endblock %}

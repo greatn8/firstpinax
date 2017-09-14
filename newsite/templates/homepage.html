@@ -10,15 +10,16 @@
     <section class="jumbotron">
         <div class="container">
             {% include "_messages.html" %}
-            <h1>{% blocktrans %}Welcome to<br>pinax-project-account{% endblocktrans %}</h1>
+            <h1>{% blocktrans %}Welcome to<br>Construction Insights Demo{% endblocktrans %}</h1>
             <p>
                 {% blocktrans %}
-                In addition to what is provided by the "zero" project, this project
-                provides thorough integration with django-user-accounts, adding
-                comprehensive account management functionality. It is a foundation
-                suitable for most sites that have user accounts.
+                In addition to being a showcase of an implmentation of our Cordell Projects API this site provides can provide insignts in construction activity.
                 {% endblocktrans %}
             </p>
+
+            {% if user.is_authenticated %}
+            <h1>You are logged in</h1>
+            {% endif %}
             {% if not user.is_authenticated %}
             {% url "account_login" as login_url %}
             {% url "account_signup" as signup_url %}
@@ -28,37 +29,29 @@
     </section>
     <section>
         <div class="container">
-            <h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2>
+            <h2 class="text-center">{% blocktrans %}What is Construction Insights?{% endblocktrans %}</h2>
             <p class="lead">
                 {% blocktrans %}
-                <b>Pinax</b> is an open-source platform based on Django and
-                intended to provide a starting point for websites. It takes
-                care of the things that many sites have in common, so you can
-                focus on what makes your site different.
+                <b>Construction Insights</b> leverages Cordell Project Information to provide a graphical overview of construction trends & activity. It also provides information the supply of new Residenital & Commerical developments for any chosen area.
                 {% endblocktrans %}
             </p>
             <div class="feature-columns">
                 <div>
                     <i class="fa fa-cubes fa-3x"></i><br>
                     {% blocktrans %}
-                    <b>Starter projects</b> provide project layout,
-                    scaffolding, already integrated components and
-                    ready-to-go code.
+                    <b>Gather</b> information for potential development sites.
                     {% endblocktrans %}
                 </div>
                 <div>
                     <i class="fa fa-puzzle-piece fa-3x"></i><br>
                     {% blocktrans %}
-                    <b>Reusable apps</b> provide common
-                    infrastructure, back-end functionality,
-                    and user-facing components.
+                    <b>Better Decisions</b> can be made when planniung for the future.
                     {% endblocktrans %}
                 </div>
                 <div>
                     <i class="fa fa-tint fa-3x"></i><br>
                     {% blocktrans %}
-                    <b>Themes</b> provide default templates and
-                    stylesheets for quick prototyping and easy customization.
+                    <b>Timely</b> Informtion updated Daily.
                     {% endblocktrans %}
                 </div>
             </div>

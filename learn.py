@@ -65,10 +65,11 @@ token()
 ##example project search date inout manually grabs token from token()
 def getprojectsdate():	
 	#base url
+	#UAT http://projectsapi-UAT.cordell.com.au/api/Projects/ProjectGetAllData dont know what data is in there?
 	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/ProjectGetAllData"
 
 	#manually adding date for now
-	querystring = {"FROMDATE":"12/06/2017","TODATE":"12/09/2017"}
+	querystring = {"FROMDATE":"01/01/201","TODATE":"30/03/2013"}
 
 	#addd header, uses finaltoken from token() function
 	headers = {
