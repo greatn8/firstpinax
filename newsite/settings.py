@@ -137,7 +137,8 @@ INSTALLED_APPS = [
 
     # project
     "newsite",
-    "location_field.apps.DefaultConfig"
+    "location_field.apps.DefaultConfig",
+    'import_export',
 ]
 
 # A sample logging configuration. The only tangible logging

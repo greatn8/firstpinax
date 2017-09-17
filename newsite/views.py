@@ -42,24 +42,53 @@ class ChartData(APIView):
 	permission_classes = []
 
 	def get(self, request, format=None):
-		#provide label data for label field below
 		QLD_count = Project.objects.all().filter(Project_State="QLD").count()
+		#for QLD started construction over 12 months 2017
 		ProjectsQLDJANstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-02-01', PROJ_START_DATE_DETAIL__gte='2017-01-01',Project_State="QLD").count(),
-
 		ProjectsQLDFEBstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-03-01', PROJ_START_DATE_DETAIL__gte='2017-02-01',Project_State="QLD").count(),
 		ProjectsQLDMARstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-04-01', PROJ_START_DATE_DETAIL__gte='2017-03-01',Project_State="QLD").count(),
+		ProjectsQLDAPRstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-05-01', PROJ_START_DATE_DETAIL__gte='2017-04-01',Project_State="QLD").count(),
+		ProjectsQLDMAYstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-06-01', PROJ_START_DATE_DETAIL__gte='2017-05-01',Project_State="QLD").count(),
+		ProjectsQLDJUNstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-07-01', PROJ_START_DATE_DETAIL__gte='2017-06-01',Project_State="QLD").count(),
+		ProjectsQLDJULstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-08-01', PROJ_START_DATE_DETAIL__gte='2017-07-01',Project_State="QLD").count(),
+		ProjectsQLDAUGstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-09-01', PROJ_START_DATE_DETAIL__gte='2017-08-01',Project_State="QLD").count(),
+		ProjectsQLDSEPstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-10-01', PROJ_START_DATE_DETAIL__gte='2017-09-01',Project_State="QLD").count(),
+		ProjectsQLDOCTstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-11-01', PROJ_START_DATE_DETAIL__gte='2017-10-01',Project_State="QLD").count(),
+		ProjectsQLDNOVstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-12-01', PROJ_START_DATE_DETAIL__gte='2017-11-01',Project_State="QLD").count(),
+		ProjectsQLDDECstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-01-01', PROJ_START_DATE_DETAIL__gte='2017-12-01',Project_State="QLD").count(),
 
+		#for NSW started construction over 12 months 2017
+		ProjectsNSWJANstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-02-01', PROJ_START_DATE_DETAIL__gte='2017-01-01',Project_State="NSW").count(),
+		ProjectsNSWFEBstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-03-01', PROJ_START_DATE_DETAIL__gte='2017-02-01',Project_State="NSW").count(),
+		ProjectsNSWMARstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-04-01', PROJ_START_DATE_DETAIL__gte='2017-03-01',Project_State="NSW").count(),
+		ProjectsNSWAPRstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-05-01', PROJ_START_DATE_DETAIL__gte='2017-04-01',Project_State="NSW").count(),
+		ProjectsNSWMAYstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-06-01', PROJ_START_DATE_DETAIL__gte='2017-05-01',Project_State="NSW").count(),
+		ProjectsNSWJUNstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-07-01', PROJ_START_DATE_DETAIL__gte='2017-06-01',Project_State="NSW").count(),
+		ProjectsNSWJULstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-08-01', PROJ_START_DATE_DETAIL__gte='2017-07-01',Project_State="NSW").count(),
+		ProjectsNSWAUGstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-09-01', PROJ_START_DATE_DETAIL__gte='2017-08-01',Project_State="NSW").count(),
+		ProjectsNSWSEPstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-10-01', PROJ_START_DATE_DETAIL__gte='2017-09-01',Project_State="NSW").count(),
+		ProjectsNSWOCTstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-11-01', PROJ_START_DATE_DETAIL__gte='2017-10-01',Project_State="NSW").count(),
+		ProjectsNSWNOVstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-12-01', PROJ_START_DATE_DETAIL__gte='2017-11-01',Project_State="NSW").count(),
+		ProjectsNSWDECstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-01-01', PROJ_START_DATE_DETAIL__gte='2017-12-01',Project_State="NSW").count(),
+		#provide label data for label field below
 		labels = ["QLD Projects", "Blue", "Yellow", "Green", "Purple", "Orange"]
 		default_items = [QLD_count, 500, 654, 343, 455, 600 ]
 
-		labelsqldcom17 = ["Jan", "Feb", "March"]
-		QLDCommence17 = [100, 200, 300]
+		labelsqldcom17 = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+		#qld commence 17 to be returned in json format below
+		QLDCommence17 = [ProjectsQLDJANstart, ProjectsQLDFEBstart, ProjectsQLDMARstart, ProjectsQLDAPRstart, ProjectsQLDMAYstart, ProjectsQLDJUNstart, ProjectsQLDJULstart, ProjectsQLDAUGstart, ProjectsQLDSEPstart, ProjectsQLDOCTstart, ProjectsQLDNOVstart, ProjectsQLDDECstart]
+		#new commence 17 to be returned in json format below
+		NSWCommence17 = [ProjectsNSWJANstart, ProjectsNSWFEBstart, ProjectsNSWMARstart, ProjectsNSWAPRstart, ProjectsNSWMAYstart, ProjectsNSWJUNstart, ProjectsNSWJULstart, ProjectsNSWAUGstart, ProjectsNSWSEPstart, ProjectsNSWOCTstart, ProjectsNSWNOVstart, ProjectsNSWDECstart]
 		#data to return in json format
 		data = {
 			"labels": labels,
 			"default": default_items,
 
+			#QLD Commence 2017 	
 			"QLDCommence17": QLDCommence17,
+			#NSW Commence 2017 	
+			"NSWCommence17": NSWCommence17,
+
 			"labelsqldcom17": labelsqldcom17,
 			#gets count of pbject in Project model
 			"projects": Project.objects.count(),
@@ -70,7 +99,7 @@ class ChartData(APIView):
 			"projectsVIC": Project.objects.all().filter(Project_State="VIC").count(),
 			#projectsstarting month and state can be modified with more filters yyyy-mm-dd - this QLD JAN commencemnt
 			"ProjectsQLDJANstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-02-01', PROJ_START_DATE_DETAIL__gte='2017-01-01',Project_State="QLD").count(),
-			"ProjectsQLDJFEBstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-03-01', PROJ_START_DATE_DETAIL__gte='2017-02-01',Project_State="QLD").count(),
+			"ProjectsQLDFEBstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-03-01', PROJ_START_DATE_DETAIL__gte='2017-02-01',Project_State="QLD").count(),
 			"ProjectsQLDMARstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-04-01', PROJ_START_DATE_DETAIL__gte='2017-03-01',Project_State="QLD").count(),
 			"ProjectsQLDAPRstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-05-01', PROJ_START_DATE_DETAIL__gte='2017-04-01',Project_State="QLD").count(),
 			"ProjectsQLDMAYstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-06-01', PROJ_START_DATE_DETAIL__gte='2017-05-01',Project_State="QLD").count(),
@@ -81,6 +110,8 @@ class ChartData(APIView):
 			"ProjectsQLDOCTstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-11-01', PROJ_START_DATE_DETAIL__gte='2017-10-01',Project_State="QLD").count(),
 			"ProjectsQLDNOVstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-12-01', PROJ_START_DATE_DETAIL__gte='2017-11-01',Project_State="QLD").count(),
 			"ProjectsQLDDECstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-01-01', PROJ_START_DATE_DETAIL__gte='2017-12-01',Project_State="QLD").count(),
+		
+			"ProjectsNSWJANstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-02-01', PROJ_START_DATE_DETAIL__gte='2017-01-01',Project_State="NSW").count(),
 		}	
 		return Response(data)
 # QLD Commencemnt Chart

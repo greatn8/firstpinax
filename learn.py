@@ -35,10 +35,12 @@ import requests
 
 def token():
 	global finaltoken
+	#"http://cordellprojectsapi.cordell.com.au/api/Projects/InvokeAPI"
+	#uat http://projectsapi-UAT.cordell.com.au/api/Projects/InvokeAPI"
 	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/InvokeAPI"
 
 	headers = {
-    	'username': "",
+    	'username': "c-130769",
     	'password': "",
     	
     	}
@@ -64,12 +66,12 @@ token()
 
 ##example project search date inout manually grabs token from token()
 def getprojectsdate():	
-	#base url
+	#base url "http://cordellprojectsapi.cordell.com.au/api/Projects/ProjectGetAllData"
 	#UAT http://projectsapi-UAT.cordell.com.au/api/Projects/ProjectGetAllData dont know what data is in there?
 	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/ProjectGetAllData"
 
 	#manually adding date for now
-	querystring = {"FROMDATE":"01/01/201","TODATE":"30/03/2013"}
+	querystring = {"FROMDATE":"01/07/2016","TODATE":"30/09/2016"}
 
 	#addd header, uses finaltoken from token() function
 	headers = {

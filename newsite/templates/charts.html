@@ -9,7 +9,7 @@
 {% load i18n %}
 
 {% block head_title %}pinax-project-account{% endblock %}
-
+<!-- ?? not sure which block this is anymore remove and can't see any change? check later  -->
 {% block body_class %}home{% endblock %}
 
 
@@ -27,6 +27,7 @@
                 
                 {% endblocktrans %}
             </p>
+            <!-- This part here appears if not logged in -->
             {% if not user.is_authenticated %}
             {% url "account_login" as login_url %}
             {% url "account_signup" as signup_url %}
@@ -38,8 +39,113 @@
         <!-- removed div class attribute url-endpoint='{% url "api-data" %}' as didnt know what it did and everything fucntions without-->
         <div class="container">
             <h2 class="text-center">{% blocktrans %}Available Charts{% endblocktrans %}</h2>
-            <h3><u><b>QLD</b></u></h3>
             <h3><a href="/index">Chart1</a></h3>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Page Heading -->
+      <h1 class="my-4">Page Heading
+        <small>Secondary Text</small>
+      </h1>
+
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="/index">Construction Acvitivity by Commencement</a>
+              </h4>
+              <p class="card-text">Construction Activity basedon commencement dates of new oncstruction projects.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Two</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Three</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Four</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Five</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Six</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Pagination -->
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+    <!-- /.container -->
             <canvas id="ChartView" width="400" height="400"></canvas>
             <!--chart 2-->
             <canvas id="ChartView2" width="400" height="400"></canvas>
@@ -65,7 +171,7 @@
                     defaultData = data.default
                     // should make this into fucntion setChart() to be called later
                     var myChart = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'polarArea',
                     data: {
                         labels: labels,
                         datasets: [{
@@ -156,10 +262,10 @@
 
             {% endblock %}
             </script>
-            <h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2>
+            <!--<h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2> -->
             
     </section>
-    <section>
+    <!-- <section>
         <div class="container">
             <p class="lead text-center">
                 {% blocktrans %}
@@ -168,5 +274,5 @@
                 {% endblocktrans %}
             </p>
         </div>
-    </section>
+    </section> -->
 {% endblock %}
