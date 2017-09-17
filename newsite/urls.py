@@ -14,7 +14,9 @@ urlpatterns = [
     url(r"^account/", include("account.urls")),
     url(r"^index/", views.index, name='index'),
     url(r"^api/chart/data/", ChartData.as_view(), name='api-data'),
-    url(r"^chart/", views.ChartView, name='ChartView')
+    url(r"^chart/", views.ChartView, name='ChartView'),
+	url(r"^testing/", views.TestView, name='TestView'),
+	url(r"^commencing/", views.CommenceView, name='CommenceView'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

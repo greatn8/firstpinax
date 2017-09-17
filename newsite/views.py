@@ -29,6 +29,12 @@ def index(request):
 def ChartView(request):
 		return render(request, 'charts.html')
 
+def TestView(request):
+		return render(request, 'test.html')		
+
+def CommenceView(request):
+		return render(request, 'commencing.html')			
+
 def get_data(request, *args, **kwargs):
 		data = {
 			"Sales": 100,
@@ -57,6 +63,21 @@ class ChartData(APIView):
 		ProjectsQLDNOVstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-12-01', PROJ_START_DATE_DETAIL__gte='2017-11-01',Project_State="QLD").count(),
 		ProjectsQLDDECstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-01-01', PROJ_START_DATE_DETAIL__gte='2017-12-01',Project_State="QLD").count(),
 
+		#for QLD started construction over 12 months 2018
+		ProjectsQLDJAN18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-02-01', PROJ_START_DATE_DETAIL__gte='2018-01-01',Project_State="QLD").count(),
+		ProjectsQLDFEB18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-03-01', PROJ_START_DATE_DETAIL__gte='2018-02-01',Project_State="QLD").count(),
+		ProjectsQLDMAR18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-04-01', PROJ_START_DATE_DETAIL__gte='2018-03-01',Project_State="QLD").count(),
+		ProjectsQLDAPR18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-05-01', PROJ_START_DATE_DETAIL__gte='2018-04-01',Project_State="QLD").count(),
+		ProjectsQLDMAY18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-06-01', PROJ_START_DATE_DETAIL__gte='2018-05-01',Project_State="QLD").count(),
+		ProjectsQLDJUN18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-07-01', PROJ_START_DATE_DETAIL__gte='2018-06-01',Project_State="QLD").count(),
+		ProjectsQLDJUL18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-08-01', PROJ_START_DATE_DETAIL__gte='2018-07-01',Project_State="QLD").count(),
+		ProjectsQLDAUG18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-09-01', PROJ_START_DATE_DETAIL__gte='2018-08-01',Project_State="QLD").count(),
+		ProjectsQLDSEP18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-10-01', PROJ_START_DATE_DETAIL__gte='2018-09-01',Project_State="QLD").count(),
+		ProjectsQLDOCT18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-11-01', PROJ_START_DATE_DETAIL__gte='2018-10-01',Project_State="QLD").count(),
+		ProjectsQLDNOV18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-12-01', PROJ_START_DATE_DETAIL__gte='2018-11-01',Project_State="QLD").count(),
+		ProjectsQLDDEC18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2019-01-01', PROJ_START_DATE_DETAIL__gte='2018-12-01',Project_State="QLD").count(),
+
+
 		#for NSW started construction over 12 months 2017
 		ProjectsNSWJANstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-02-01', PROJ_START_DATE_DETAIL__gte='2017-01-01',Project_State="NSW").count(),
 		ProjectsNSWFEBstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-03-01', PROJ_START_DATE_DETAIL__gte='2017-02-01',Project_State="NSW").count(),
@@ -70,24 +91,48 @@ class ChartData(APIView):
 		ProjectsNSWOCTstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-11-01', PROJ_START_DATE_DETAIL__gte='2017-10-01',Project_State="NSW").count(),
 		ProjectsNSWNOVstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-12-01', PROJ_START_DATE_DETAIL__gte='2017-11-01',Project_State="NSW").count(),
 		ProjectsNSWDECstart = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-01-01', PROJ_START_DATE_DETAIL__gte='2017-12-01',Project_State="NSW").count(),
+		
+		#for NSW started construction over 12 months 2018
+		ProjectsNSWJAN18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-02-01', PROJ_START_DATE_DETAIL__gte='2018-01-01',Project_State="NSW").count(),
+		ProjectsNSWFEB18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-03-01', PROJ_START_DATE_DETAIL__gte='2018-02-01',Project_State="NSW").count(),
+		ProjectsNSWMAR18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-04-01', PROJ_START_DATE_DETAIL__gte='2018-03-01',Project_State="NSW").count(),
+		ProjectsNSWAPR18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-05-01', PROJ_START_DATE_DETAIL__gte='2018-04-01',Project_State="NSW").count(),
+		ProjectsNSWMAY18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-06-01', PROJ_START_DATE_DETAIL__gte='2018-05-01',Project_State="NSW").count(),
+		ProjectsNSWJUN18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-07-01', PROJ_START_DATE_DETAIL__gte='2018-06-01',Project_State="NSW").count(),
+		ProjectsNSWJUL18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-08-01', PROJ_START_DATE_DETAIL__gte='2018-07-01',Project_State="NSW").count(),
+		ProjectsNSWAUG18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-09-01', PROJ_START_DATE_DETAIL__gte='2018-08-01',Project_State="NSW").count(),
+		ProjectsNSWSEP18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-10-01', PROJ_START_DATE_DETAIL__gte='2018-09-01',Project_State="NSW").count(),
+		ProjectsNSWOCT18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-11-01', PROJ_START_DATE_DETAIL__gte='2018-10-01',Project_State="NSW").count(),
+		ProjectsNSWNOV18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-12-01', PROJ_START_DATE_DETAIL__gte='2018-11-01',Project_State="NSW").count(),
+		ProjectsNSWDEC18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2019-01-01', PROJ_START_DATE_DETAIL__gte='2018-12-01',Project_State="NSW").count(),
 		#provide label data for label field below
-		labels = ["QLD Projects", "Blue", "Yellow", "Green", "Purple", "Orange"]
-		default_items = [QLD_count, 500, 654, 343, 455, 600 ]
+		labels = ["Commercial", "Industrial", "Community", "Residential", "Civil"]
+		default_items = [530, 400, 654, 700, 655]
+		default_items2 = [630, 550, 404, 650, 635]
 
 		labelsqldcom17 = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 		#qld commence 17 to be returned in json format below
 		QLDCommence17 = [ProjectsQLDJANstart, ProjectsQLDFEBstart, ProjectsQLDMARstart, ProjectsQLDAPRstart, ProjectsQLDMAYstart, ProjectsQLDJUNstart, ProjectsQLDJULstart, ProjectsQLDAUGstart, ProjectsQLDSEPstart, ProjectsQLDOCTstart, ProjectsQLDNOVstart, ProjectsQLDDECstart]
+		#qld commence 18 to be returned in json format below
+		QLDCommence18 = [ProjectsQLDJAN18start, ProjectsQLDFEB18start, ProjectsQLDMAR18start, ProjectsQLDAPR18start, ProjectsQLDMAY18start, ProjectsQLDJUN18start, ProjectsQLDJUL18start, ProjectsQLDAUG18start, ProjectsQLDSEP18start, ProjectsQLDOCT18start, ProjectsQLDNOV18start, ProjectsQLDDEC18start]
 		#new commence 17 to be returned in json format below
 		NSWCommence17 = [ProjectsNSWJANstart, ProjectsNSWFEBstart, ProjectsNSWMARstart, ProjectsNSWAPRstart, ProjectsNSWMAYstart, ProjectsNSWJUNstart, ProjectsNSWJULstart, ProjectsNSWAUGstart, ProjectsNSWSEPstart, ProjectsNSWOCTstart, ProjectsNSWNOVstart, ProjectsNSWDECstart]
+		#new commence 18 to be returned in json format below
+		NSWCommence18 = [ProjectsNSWJAN18start, ProjectsNSWFEB18start, ProjectsNSWMAR18start, ProjectsNSWAPR18start, ProjectsNSWMAY18start, ProjectsNSWJUN18start, ProjectsNSWJUL18start, ProjectsNSWAUG18start, ProjectsNSWSEP18start, ProjectsNSWOCT18start, ProjectsNSWNOV18start, ProjectsNSWDEC18start]
 		#data to return in json format
 		data = {
 			"labels": labels,
 			"default": default_items,
+			"default2": default_items2,
 
 			#QLD Commence 2017 	
 			"QLDCommence17": QLDCommence17,
+			#QLD Commence 2018 	
+			"QLDCommence18": QLDCommence18,
 			#NSW Commence 2017 	
 			"NSWCommence17": NSWCommence17,
+			#NSW Commence 2017 	
+			"NSWCommence18": NSWCommence18,
 
 			"labelsqldcom17": labelsqldcom17,
 			#gets count of pbject in Project model
