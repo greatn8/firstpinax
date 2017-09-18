@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import django.views.generic
 from django.http import HttpResponse
+from django.db.models import Avg
 import urllib2
 import datetime 
 
@@ -30,7 +31,7 @@ def ChartView(request):
 		return render(request, 'charts.html')
 
 def TestView(request):
-		return render(request, 'test.html')		
+		return render(request, 'testing.html')		
 
 def CommenceView(request):
 		return render(request, 'commencing.html')			
@@ -105,10 +106,21 @@ class ChartData(APIView):
 		ProjectsNSWOCT18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-11-01', PROJ_START_DATE_DETAIL__gte='2018-10-01',Project_State="NSW").count(),
 		ProjectsNSWNOV18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-12-01', PROJ_START_DATE_DETAIL__gte='2018-11-01',Project_State="NSW").count(),
 		ProjectsNSWDEC18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2019-01-01', PROJ_START_DATE_DETAIL__gte='2018-12-01',Project_State="NSW").count(),
+		
+		#average values of qLD retial,warehoujes... used for sectors and categories
+		showrooms_countQLD = Project.objects.all().filter(Project_Category="SHOWROOMS, RETAIL WAREHOUSES, RETAIL MARKETS, BULKY GOODS",Project_State="QLD" ).aggregate(Avg('PROJ_VALUE')),	
+		showrooms_countQLD2 = round(showrooms_countQLD[0]['PROJ_VALUE__avg']) * 1000
+
+		#SHOPS, SHOPPING CENTRES & ARCADES, SUPERMARKETS
 		#provide label data for label field below
 		labels = ["Commercial", "Industrial", "Community", "Residential", "Civil"]
+		#used on commencing page for by sector graph
 		default_items = [530, 400, 654, 700, 655]
 		default_items2 = [630, 550, 404, 650, 635]
+
+
+		QLDmedCat_items = [5264842, 4652842, 6524832, 5731548, 5601542]
+		NSWmedCat_items2 = [6325426, 5456284, 4658425, 6654351, 3315841]
 
 		labelsqldcom17 = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 		#qld commence 17 to be returned in json format below
@@ -119,6 +131,8 @@ class ChartData(APIView):
 		NSWCommence17 = [ProjectsNSWJANstart, ProjectsNSWFEBstart, ProjectsNSWMARstart, ProjectsNSWAPRstart, ProjectsNSWMAYstart, ProjectsNSWJUNstart, ProjectsNSWJULstart, ProjectsNSWAUGstart, ProjectsNSWSEPstart, ProjectsNSWOCTstart, ProjectsNSWNOVstart, ProjectsNSWDECstart]
 		#new commence 18 to be returned in json format below
 		NSWCommence18 = [ProjectsNSWJAN18start, ProjectsNSWFEB18start, ProjectsNSWMAR18start, ProjectsNSWAPR18start, ProjectsNSWMAY18start, ProjectsNSWJUN18start, ProjectsNSWJUL18start, ProjectsNSWAUG18start, ProjectsNSWSEP18start, ProjectsNSWOCT18start, ProjectsNSWNOV18start, ProjectsNSWDEC18start]
+		
+
 		#data to return in json format
 		data = {
 			"labels": labels,
@@ -157,7 +171,16 @@ class ChartData(APIView):
 			"ProjectsQLDDECstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-01-01', PROJ_START_DATE_DETAIL__gte='2017-12-01',Project_State="QLD").count(),
 		
 			"ProjectsNSWJANstart": Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2017-02-01', PROJ_START_DATE_DETAIL__gte='2017-01-01',Project_State="NSW").count(),
+
+			"showrooms_countQLD": showrooms_countQLD,
+			"QLDmedCat_items" : QLDmedCat_items,
+			"NSWmedCat_items2" : NSWmedCat_items2,
+			
+			"showrooms_countQLD" : showrooms_countQLD2,
+
 		}	
+
+
 		return Response(data)
 # QLD Commencemnt Chart
 # class Chart2(APIView):

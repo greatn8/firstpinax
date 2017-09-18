@@ -7,13 +7,13 @@
 {% block body_class %}home{% endblock %}
 
 {% block body_base %}
-    <section class="jumbotron">
+    <section class="jumbotron" height='300' width='241'style="background-image:url(https://png.pngtree.com/thumb_back/fh260/back_pic/00/01/40/5756016e606b142.jpg); background-repeat: no-repeat; background-size: 100% 100%;">
         <div class="container">
             {% include "_messages.html" %}
-            <h1>{% blocktrans %}Welcome to<br>Construction Insights Demo{% endblocktrans %}</h1>
-            <p>
+            <h1 style="color:white">{% blocktrans %}Welcome to<br>Construction Insights Demo{% endblocktrans %}</h1>
+            <p style="color:white">
                 {% blocktrans %}
-                In addition to being a showcase of an implmentation of our Cordell Projects API this site provides can provide insignts in construction activity.
+                An Implmentation of our Cordell Projects API that provides visual insights in construction activity.
                 {% endblocktrans %}
             </p>
 
@@ -25,7 +25,7 @@
             {% if not user.is_authenticated %}
             {% url "account_login" as login_url %}
             {% url "account_signup" as signup_url %}
-            <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p>
+            <p style="color:white">{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p>
             {% endif %}
         </div>
     </section>
@@ -39,19 +39,19 @@
             </p>
             <div class="feature-columns">
                 <div>
-                    <i class="fa fa-cubes fa-3x"></i><br>
+                    <i class="fa fa-bar-chart fa-5x"></i><br>
                     {% blocktrans %}
                     <b>Gather</b> information for potential development sites.
                     {% endblocktrans %}
                 </div>
                 <div>
-                    <i class="fa fa-puzzle-piece fa-3x"></i><br>
+                    <i class="fa fa-pie-chart fa-5x"></i><br>
                     {% blocktrans %}
                     <b>Better Decisions</b> can be made when planniung for the future.
                     {% endblocktrans %}
                 </div>
                 <div>
-                    <i class="fa fa-tint fa-3x"></i><br>
+                    <i class="fa fa-area-chart fa-5x"></i><br>
                     {% blocktrans %}
                     <b>Timely</b> Informtion updated Daily.
                     {% endblocktrans %}

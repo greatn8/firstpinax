@@ -7,7 +7,6 @@ from django.contrib import admin
 from newsite import views
 from .views import ChartData
 
-
 urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
     url(r"^admin/", include(admin.site.urls)),
@@ -15,7 +14,7 @@ urlpatterns = [
     url(r"^index/", views.index, name='index'),
     url(r"^api/chart/data/", ChartData.as_view(), name='api-data'),
     url(r"^chart/", views.ChartView, name='ChartView'),
-	url(r"^testing/", views.TestView, name='TestView'),
+	url(r"^median/", views.TestView, name='TestView'),
 	url(r"^commencing/", views.CommenceView, name='CommenceView'),
 ]
 

@@ -37,6 +37,7 @@
     <section>
         <!-- removed div class attribute url-endpoint='{% url "api-data" %}' as didnt know what it did and everything fucntions without-->
         <div class="container">
+            <h2 class="text-center">{% blocktrans %}Number of Projects Commencing by STATE in 2017{% endblocktrans %}</h2>
                 <!-- Page Content -->
     <div class="container">
 
@@ -48,86 +49,212 @@
       <div class="row">
         <div class="col-lg-12 portfolio-item">
           <div class="card h-100">
+            <canvas id="ChartView5" width="400" height="300"></canvas>
+            <button id="0" type="button" >2017</button>
+            <button id="1" type="button" >2018</button>
             <!-- start button -->
 <!--             <select id="DataType">
-			<option value="dataDaily">Daily</option>
-			<option value="dataWeekly">Weekly</option>
-			<option value="dataMonthly">Monthly</option>
-			</select>
-			<div id="chart"></div> -->
-			<!-- end button -->
+            <option value="dataDaily">Daily</option>
+            <option value="dataWeekly">Weekly</option>
+            <option value="dataMonthly">Monthly</option>
+            </select>
+            <div id="chart"></div> -->
+            <!-- end button -->
             <div class="card-body">
               <h4 class="card-title">
-
+            <h2 class="text-center">{% blocktrans %}Average Project Value by Sector{% endblocktrans %}</h2>
               </h4>
               
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+              <p class="card-text">Click the Setor labels on the graph to add or remove Sectors, Click the State buttons below the graph to change the STATE being displatey.</p>
             </div>
           </div>
         </div>
         <div class="col-lg-12 portfolio-item">
           <div class="card h-100">
-            <canvas id="ChartView" width="400" height="400"></canvas>
+            <canvas id="ChartView6" width="400" height="400"></canvas>
+            <button id="3" type="button" >NSW</button>
+            <button id="4" type="button" >QLD</button>
 
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Two</a>
-              </h4>
-              <canvas id="ChartView" width="400" height="300"></canvas>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Three</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Four</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Five</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Six</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
+            
       <!-- /.row -->
 
+            <!--chart 2-->
 
+
+
+            <script>
+            console.log('hi')
+            console.log('hi')
+            console.log('hi')
+            console.log('hi')
+            
+            // ajax to get json data from api
+            {% block jquery %}
+            var endpoint = '/api/chart/data/' // url api 
+            //initilise empty array (list in python) this gets put into var myChart data: 
+            var defaultData = []
+            var labels = []
+            //main ajax call
+            $.ajax({
+                method: "GET",
+                url: endpoint,
+                //data is the response data here
+                success: function(data){
+                    labels = data.labels
+                    defaultData = data.default
+                    defaultData2 = data.default2
+                    //getting json data
+                    labelsqldcom17 = data.labelsqldcom17
+                    QLDCommence17 = data.QLDCommence17
+                    QLDCommence18 = data.QLDCommence18
+                    NSWCommence17 = data.NSWCommence17
+                    NSWCommence18 = data.NSWCommence18
+                    
+                    //average values
+                    QLDmedCat_items = data.QLDmedCat_items
+                    NSWmedCat_items2 = data.NSWmedCat_items2
+
+                    // chart with buttons!!
+                    var chart_labels = labelsqldcom17;
+                    var temp_dataset = QLDCommence17;
+                    var rain_dataset = NSWCommence17;
+                    
+                    var config = {
+                        type: 'bar',
+                        data: {
+                            labels: chart_labels,
+                            datasets: [{
+                                type: 'line',
+                                label: "NSW",
+                                yAxisID: "y-axis-0",
+                                fill: false,
+                                data: temp_dataset,
+                                borderColor: 'rgb(75, 192, 192)'
+                            }, {
+                                type: 'line',
+                                label: "QLD",
+                                fill: false,
+                                data: rain_dataset,
+                                borderColor: 'red',
+                        }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    position: "left",
+                                    "id": "y-axis-0",
+                                }]
+                            }
+                        }
+                    };
+                    var forecast_chart = new Chart(ctx5, config);
+                    $("#0").click(function() {
+                        var data = forecast_chart.config.data;
+                        data.datasets[0].data = temp_dataset;
+                        data.datasets[1].data = rain_dataset;
+
+                        data.labels = labelsqldcom17;
+                        forecast_chart.update();
+                    });
+                    $("#1").click(function() {
+                        var chart_labels = labelsqldcom17;
+                        var temp_dataset = QLDCommence18;
+                        var rain_dataset = NSWCommence18;
+                        var data = forecast_chart.config.data;
+                        data.datasets[0].data = temp_dataset;
+                        data.datasets[1].data = rain_dataset;
+                        data.labels = labelsqldcom17;
+                        forecast_chart.update();
+                    });
+
+
+                    // chart with buttons!! again
+                    var chart_labels2 = labels;
+                    var temp_dataset2 = QLDmedCat_items
+                    var rain_dataset2 = NSWmedCat_items2;
+                    
+                    var config = {
+                        type: 'bar',
+                        data: {
+                            labels: chart_labels2,
+                            datasets: [{
+                                type: 'bar',
+                                label: "NSW",
+                                
+                                fill: false,
+                                data: temp_dataset2,
+                                borderColor: 'rgb(75, 192, 192)',
+                                backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)', 
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                                ],
+                            }]
+                        },
+                        options: {
+                             scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                        
+                        
+                    };
+                    var forecast_chart2 = new Chart(ctx6, config);
+                    $("#3").click(function() {
+                        var data = forecast_chart2.config.data;
+                        data.datasets[0].data = temp_dataset2;
+                        
+
+                        data.labels = chart_labels2;
+                        forecast_chart2.update();
+                    });
+                    $("#4").click(function() {
+                        var chart_labels2 = labels;
+                        var temp_dataset2 = NSWmedCat_items2;
+                        var rain_dataset2 = NSWmedCat_items2;
+                        var data = forecast_chart2.config.data;
+                        data.datasets[0].data = rain_dataset2;
+                       
+                        data.labels = chart_labels2;
+                        forecast_chart2.update();
+                    });
+                        console.log("working!!!!!!!!!!!!")
+                        console.log(data)
+                    },
+                    error: function(error_data){
+                        console.log("error")
+                        console.log(error_data)
+                    }
+                })
+            //function for chart run in success call
+            function setChart(){
+
+
+            }
+            // Chart.js graph
+
+
+            var ctx5 = document.getElementById("ChartView5").getContext('2d');
+
+            var ctx6 = document.getElementById("ChartView6").getContext('2d');
+
+            {% endblock %}
+            </script>
 <!--             <h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2>
             
     </section>
