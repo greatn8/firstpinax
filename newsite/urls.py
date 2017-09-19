@@ -16,6 +16,7 @@ urlpatterns = [
     url(r"^chart/", views.ChartView, name='ChartView'),
 	url(r"^median/", views.TestView, name='TestView'),
 	url(r"^commencing/", views.CommenceView, name='CommenceView'),
+	url(r"^newprojects/", views.NewProjectsView, name='NewProjectsView'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

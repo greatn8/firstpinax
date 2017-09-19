@@ -127,6 +127,7 @@
                         type: 'horizontalBar',
                         data: {
                             labels: chart_labels,
+                            type: 'horizontalBar',
                             datasets: [{
 
                                 label: "Average Projects Value",
@@ -177,7 +178,8 @@
                         var rain_dataset = Educationavg17;
                         var data = forecast_chart.config.data;
                         data.datasets[0].data = rain_dataset;
-                        data.labels = Educationlabels
+                        data.labels = Educationlabels;
+                        data.type = 'line'
                         forecast_chart.update();
                     });
 
@@ -243,7 +245,6 @@
                         var rain_dataset2 = NSWmedCat_items2;
                         var data = forecast_chart2.config.data;
                         data.datasets[0].data = rain_dataset2;
-                       
                         data.labels = chart_labels2;
                         forecast_chart2.update();
                     });

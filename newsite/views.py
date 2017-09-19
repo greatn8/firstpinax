@@ -36,6 +36,10 @@ def TestView(request):
 def CommenceView(request):
 		return render(request, 'commencing.html')			
 
+def NewProjectsView(request):
+		return render(request, 'newprojects.html')			
+
+
 def get_data(request, *args, **kwargs):
 		data = {
 			"Sales": 100,
@@ -122,6 +126,13 @@ class ChartData(APIView):
 		QLDmedCat_items = [5264842, 4652842, 6524832, 5731548, 5601542]
 		NSWmedCat_items2 = [6325426, 5456284, 4658425, 6654351, 3315841]
 
+		Hospitalityavgval = [6325426, 5456284, 4658425, 6654351, 3315841, 2372643, 5376256]
+		Hospitalityavgval17 = [5325426, 4456284, 5658425, 3654351, 4315841, 3372643, 4376256]
+		Hospitalitylabels = ["Hotels, Serviced Apartment", "Motels, Bed & Breakfast, Cabins","Backpacker Accomodation", "Restaurants, Canteens","Take-away Outlets", "Conference & Reception Centres & Facilities", "Clubs (licensed),Casinos,Tavers"]
+		
+		Educationavg17 = [3364324, 1605462, 9753842]
+		Educationlabels = ["Schools - Upto Year 12", "Childcare, Day Nurseries", "Tertiary - Universities, Colleges"]
+
 		labelsqldcom17 = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 		#qld commence 17 to be returned in json format below
 		QLDCommence17 = [ProjectsQLDJANstart, ProjectsQLDFEBstart, ProjectsQLDMARstart, ProjectsQLDAPRstart, ProjectsQLDMAYstart, ProjectsQLDJUNstart, ProjectsQLDJULstart, ProjectsQLDAUGstart, ProjectsQLDSEPstart, ProjectsQLDOCTstart, ProjectsQLDNOVstart, ProjectsQLDDECstart]
@@ -139,6 +150,12 @@ class ChartData(APIView):
 			"default": default_items,
 			"default2": default_items2,
 
+			"Educationavg17" : Educationavg17,
+			"Educationlabels" : Educationlabels,
+			#hospitality chart
+			"Hospitalityavgval" : Hospitalityavgval,
+			"Hospitalityavgval17" : Hospitalityavgval17,
+			"Hospitalitylabels" : Hospitalitylabels,
 			#QLD Commence 2017 	
 			"QLDCommence17": QLDCommence17,
 			#QLD Commence 2018 	
