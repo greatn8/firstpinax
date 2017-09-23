@@ -5,6 +5,9 @@
 import os,sys
 import datetime
 
+#for changeing addres to geo
+import googlemaps
+
 def setup_environment():
  pathname = os.path.dirname(sys.argv[0])
  sys.path.append(os.path.abspath(pathname))
@@ -71,7 +74,7 @@ def getprojectsdate():
 	url = "http://cordellprojectsapi.cordell.com.au/api/Projects/ProjectGetAllData"
 
 	#manually adding date for now
-	querystring = {"FROMDATE":"01/07/2016","TODATE":"30/09/2016"}
+	querystring = {"FROMDATE":"01/01/2013","TODATE":"01/03/2013"}
 
 	#addd header, uses finaltoken from token() function
 	headers = {
@@ -137,6 +140,30 @@ def getprojectsdate():
 		print pro.PROJ_STATUS_DESC
 
 
+
+		gmaps = googlemaps.Client(key='AIzaSyA1pCWm5boHwp0ABbfiIEFdP0SnukI5JiM')
+
+		geoinput = "" + pro.PROJ_ADDRESS1.string + "," + pro.PROJ_SUBURB.string + "," + pro.PROJ_STATE_CODE.string + ""
+		print "geoinput:",geoinput
+		geocode_result = gmaps.geocode(geoinput)
+
+		print geocode_result
+		print "TYPE GEOCICODE RESULT:",type(geocode_result)
+		try:
+			print "longitute ",geocode_result[0]['geometry']['location']
+			projectloc = geocode_result[0]['geometry']['location']
+			longy = geocode_result[0]['geometry']['location']['lng']
+			print "LONGY:",longy
+			print "LONGY TYPE:",type(longy)
+			latt = geocode_result[0]['geometry']['location']['lat']
+			print "LATTIT:",latt
+			print "LATTIT TYPE:",type(latt)
+			projectloc = "" + str(latt) + "," + str(longy) + ""
+			print "ProjectLoc",projectloc
+		except Exception:
+			projectloc = ""
+    		pass	
+
 		#my solution solution to get in right format dd-mm-yyyy from dd/mm/yy! :)
 		projectsta = pro.PROJ_START_DATE_DETAIL.string
 		projectstar2 = projectsta[:6] + '20' + projectsta[-2:]
@@ -163,7 +190,7 @@ def getprojectsdate():
 		print pro.PROJ_DETAIL_TEXT
 
 		#add entry with each field in our database being populated from previous
-		new_entry = Project(city=city, location='', Project_ID=projectid, Project_Title=projecttitle, Project_Type=projectcipher, Project_Post=projectpost, Project_Suburb=projectsub, Project_State=projectstate,Project_Stage=projectstage,Project_Category=projectcat,PROJ_STATUST_DESC=projectstatus,PROJ_START_DATE_DETAIL=projectstart,PROJ_END_DATE_DETAIL=projectend,PROJ_VALUE=projectvalue,PROJ_VALUE_DESC=projectvaldes,PROJ_DETAIL_TEXT=projecttxt)
+		new_entry = Project(city=city, location=projectloc, Project_ID=projectid, Project_Title=projecttitle, Project_Type=projectcipher, Project_Post=projectpost, Project_Suburb=projectsub, Project_State=projectstate,Project_Stage=projectstage,Project_Category=projectcat,PROJ_STATUST_DESC=projectstatus,PROJ_START_DATE_DETAIL=projectstart,PROJ_END_DATE_DETAIL=projectend,PROJ_VALUE=projectvalue,PROJ_VALUE_DESC=projectvaldes,PROJ_DETAIL_TEXT=projecttxt)
 		#save the entry
 		new_entry.save()
 

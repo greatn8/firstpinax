@@ -18,12 +18,12 @@ class Project(models.Model):
     Project_State = models.CharField(max_length=120, blank=False, null=True)
     Project_Stage = models.CharField(max_length=120, blank=False, null=True)
     Project_Category = models.CharField(max_length=120, blank=False, null=True)
-    PROJ_STATUST_DESC = models.CharField(max_length=120, blank=False, null=True)
+    PROJ_STATUST_DESC = models.CharField(max_length=200, blank=False, null=True)
     PROJ_START_DATE_DETAIL = models.DateField(auto_now_add=False)
     PROJ_END_DATE_DETAIL = models.DateField(auto_now_add=False)
     PROJ_VALUE = models.IntegerField(blank=False, null=True)
     PROJ_VALUE_DESC = models.CharField(max_length=120, blank=False, null=True)
-    PROJ_DETAIL_TEXT = models.CharField(max_length=120, blank=False, null=True)
+    PROJ_DETAIL_TEXT = models.CharField(max_length=1000, blank=False, null=True)
 
 #class Business(models.Model):
 #	Business_Name = models.CharField(max_length=120, blank=False, null=True)
