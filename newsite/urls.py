@@ -17,6 +17,8 @@ urlpatterns = [
 	url(r"^median/", views.TestView, name='TestView'),
 	url(r"^commencing/", views.CommenceView, name='CommenceView'),
 	url(r"^newprojects/", views.NewProjectsView, name='NewProjectsView'),
+	url(r"^newprojects2/", views.NewProjectsView2, name='NewProjectsView2'),
+	url(r"^abandoned/", views.AbandonedView, name='AbandonedView'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

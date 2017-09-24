@@ -37,7 +37,7 @@
     <section>
         <!-- removed div class attribute url-endpoint='{% url "api-data" %}' as didnt know what it did and everything fucntions without-->
         <div class="container">
-            <h2 class="text-center">{% blocktrans %}New Projects by Project Type QLD 2017 (Hospitality){% endblocktrans %}</h2>
+            <h2 class="text-center">{% blocktrans %}Average Project Value by Project Type 2017 (Hospitality){% endblocktrans %}</h2>
                 <!-- Page Content -->
     <div class="container">
 
@@ -62,7 +62,7 @@
             <!-- end button -->
             <div class="card-body">
               <h4 class="card-title">
-            <h2 class="text-center">{% blocktrans %}New Project Value by Sector & State 2017{% endblocktrans %}</h2>
+            <h2 class="text-center">{% blocktrans %}Average Project Value by Sector 2017{% endblocktrans %}</h2>
               </h4>
               
               <p class="card-text">Click the Setor labels on the graph to add or remove Sectors, Click the State buttons below the graph to change the STATE being displatey.</p>
@@ -119,9 +119,9 @@
                     NSWmedCat_items2 = data.NSWmedCat_items2
 
                     // chart with buttons!!
-                    var chart_labels = labels;
-                    var temp_dataset = defaultData;
-                    var rain_dataset = defaultData2;
+                    var chart_labels = Hospitalitylabels;
+                    var temp_dataset = Hospitalityavg;
+                    var rain_dataset = Hospitalityavg;
                     
                     var config = {
                         type: 'pie',
@@ -159,16 +159,16 @@
                         var data = forecast_chart.config.data;
                         data.datasets[0].data = temp_dataset;
 
-                        data.labels = abels;
+                        data.labels = Hospitalitylabels;
                         forecast_chart.update();
                     });
                     $("#1").click(function() {
-                        var chart_labels = labels;
-                        var temp_dataset = defaultData;
-                        var rain_dataset = defaultData2;
+                        var chart_labels = Hospitalitylabels;
+                        var temp_dataset = Hospitalityavg;
+                        var rain_dataset = Hospitalityavgval17;
                         var data = forecast_chart.config.data;
                         data.datasets[0].data = rain_dataset;
-                        data.labels = labels
+                        data.labels = Hospitalitylabels
                         forecast_chart.update();
                     });
                     $("#5").click(function() {
@@ -184,27 +184,35 @@
 
                     // chart with buttons!! again
                     var chart_labels2 = labels;
-                    var temp_dataset2 = defaultData
-                    var rain_dataset2 = defaultData2;
+                    var temp_dataset2 = QLDmedCat_items
+                    var rain_dataset2 = NSWmedCat_items2;
                     
                     var config = {
-                        type: 'radar',
+                        type: 'bar',
                         data: {
-                            labels: labels,
+                            labels: chart_labels2,
                             datasets: [{
-                                type: 'radar',
+                                type: 'bar',
                                 label: "Average Values",
                                 
-                                fill: true,
+                                fill: false,
                                 data: temp_dataset2,
-
-                                borderColor: 'rgb(54, 162, 235, 0.2)',
+                                borderColor: 'rgb(75, 192, 192)',
                                 backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
-
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)', 
+                                'rgba(255, 159, 64, 0.2)'
                             ],
                             borderColor: [
-
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
                                 ],
                             }]
                         },
@@ -226,18 +234,17 @@
                         data.datasets[0].data = temp_dataset2;
                         
 
-                        data.labels = labels;
+                        data.labels = chart_labels2;
                         forecast_chart2.update();
                     });
                     $("#4").click(function() {
                         var chart_labels2 = labels;
-                        var temp_dataset2 = defaultData;
-                        var rain_dataset2 = defaultData2;
+                        var temp_dataset2 = NSWmedCat_items2;
+                        var rain_dataset2 = NSWmedCat_items2;
                         var data = forecast_chart2.config.data;
                         data.datasets[0].data = rain_dataset2;
                        
-                        data.labels = labels;
-                        data.datasets.backgroundColor = 'red'
+                        data.labels = chart_labels2;
                         forecast_chart2.update();
                     });
                         console.log("working!!!!!!!!!!!!")

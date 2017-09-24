@@ -36,8 +36,14 @@ def TestView(request):
 def CommenceView(request):
 		return render(request, 'commencing.html')			
 
+def AbandonedView(request):
+		return render(request, 'abandoned.html')			
+
 def NewProjectsView(request):
 		return render(request, 'newprojects.html')			
+
+def NewProjectsView2(request):
+		return render(request, 'newprojects2.html')			
 
 
 def get_data(request, *args, **kwargs):
@@ -111,9 +117,13 @@ class ChartData(APIView):
 		ProjectsNSWNOV18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2018-12-01', PROJ_START_DATE_DETAIL__gte='2018-11-01',Project_State="NSW").count(),
 		ProjectsNSWDEC18start = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2019-01-01', PROJ_START_DATE_DETAIL__gte='2018-12-01',Project_State="NSW").count(),
 		
-		#average values of qLD retial,warehoujes... used for sectors and categories
+		#!average values of qLD retial,warehoujes... used for sectors and categories
 		showrooms_countQLD = Project.objects.all().filter(Project_Category="SHOWROOMS, RETAIL WAREHOUSES, RETAIL MARKETS, BULKY GOODS",Project_State="QLD" ).aggregate(Avg('PROJ_VALUE')),	
 		showrooms_countQLD2 = round(showrooms_countQLD[0]['PROJ_VALUE__avg']) * 1000
+
+		#provides gelocations for first heatmap
+		ProjectsQLD14startheat = Project.objects.filter(PROJ_START_DATE_DETAIL__lt='2014-12-31', PROJ_START_DATE_DETAIL__gte='2014-01-01',Project_State="QLD").values_list('location', flat=True),
+		
 
 		#SHOPS, SHOPPING CENTRES & ARCADES, SUPERMARKETS
 		#provide label data for label field below
@@ -195,6 +205,8 @@ class ChartData(APIView):
 			
 			"showrooms_countQLD" : showrooms_countQLD2,
 
+			#first qld heat map projects commencing in 2014 
+			"ProjectsQLD14startheat" : ProjectsQLD14startheat[0],
 		}	
 
 
