@@ -37,7 +37,9 @@
     <section>
         <!-- removed div class attribute url-endpoint='{% url "api-data" %}' as didnt know what it did and everything fucntions without-->
         <div class="container">
+        <a href="/chart"><--Back To Chart Selection</a>
             <h2 class="text-center">{% blocktrans %}Average Project Value by Project Type 2017 (Hospitality){% endblocktrans %}</h2>
+            <p class="text-center">Click the Year buttons below the graph to change the Year being displatey. Education is an example of how graph can be changed for sector.</p>
                 <!-- Page Content -->
     <div class="container">
 
@@ -52,6 +54,7 @@
             <canvas id="ChartView5" width="400" height="300"></canvas>
             <button id="0" type="button" >2017</button>
             <button id="1" type="button" >2018</button>&nbsp&nbsp&nbsp&nbsp<button id="5" type="button" >Education</button>
+            <hr />
             <!-- start button -->
 <!--             <select id="DataType">
             <option value="dataDaily">Daily</option>
@@ -65,7 +68,7 @@
             <h2 class="text-center">{% blocktrans %}Average Project Value by Sector 2017{% endblocktrans %}</h2>
               </h4>
               
-              <p class="card-text">Click the Setor labels on the graph to add or remove Sectors, Click the State buttons below the graph to change the STATE being displatey.</p>
+              <p class="text-center">Click the State buttons below the graph to change the STATE being displatey.</p>
             </div>
           </div>
         </div>
@@ -269,6 +272,9 @@
 
             {% endblock %}
             </script>
+            <br/>
+            <br/>
+                    <a href="/chart"><--Back To Chart Selection</a>
 <!--             <h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2>
             
     </section>

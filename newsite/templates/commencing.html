@@ -35,7 +35,9 @@
     <section>
         <!-- removed div class attribute url-endpoint='{% url "api-data" %}' as didnt know what it did and everything fucntions without-->
         <div class="container">
+        <a href="/chart"><-- Back To Chart Selection</a>
             <h2 class="text-center">{% blocktrans %}Number of Projects Commencing by STATE in 2017{% endblocktrans %}</h2>
+            <p class="text-center">Click the State labels on the graph to add or remove States, Click the Year buttons below the graph to change the Year being displatey.</p>
                 <!-- Page Content -->
     <div class="container">
 
@@ -50,6 +52,7 @@
             <canvas id="ChartView5" width="400" height="300"></canvas>
             <button id="0" type="button" >2017</button>
       <button id="1" type="button" >2018</button>
+      <hr />
             <!-- start button -->
 <!--             <select id="DataType">
       <option value="dataDaily">Daily</option>
@@ -63,7 +66,7 @@
             <h2 class="text-center">{% blocktrans %}Number of Projects Commencing by Sector / Year {% endblocktrans %}</h2>
               </h4>
               
-              <p class="card-text">Click the Setor labels on the graph to add or remove Sectors, Click the State buttons below the graph to change the STATE being displatey.</p>
+              <p class="text-center">Click the Setor labels on the graph to add or remove Sectors, Click the State buttons below the graph to change the STATE being displatey.</p>
             </div>
           </div>
         </div>
@@ -72,6 +75,7 @@
             <canvas id="ChartView6" width="400" height="400"></canvas>
             <button id="3" type="button" >NSW</button>
             <button id="4" type="button" >QLD</button>
+            <hr />
 
             
       <!-- /.row -->
@@ -279,6 +283,7 @@
 
     </div>
     <h2 class="text-center">{% blocktrans %}Retail Projects Commencing in 2014 QLD{% endblocktrans %}</h2>
+    <p class="text-center">Demonstration of Heatmap which could also be done by state/sector/stages/values & more.</p>
     <div id="map" style="height: 100%"></div>
     <button onclick="toggleHeatmap()">Toggle Heatmap</button>
       <button onclick="changeGradient()">Change gradient</button>
@@ -415,6 +420,9 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1pCWm5boHwp0ABbfiIEFdP0SnukI5JiM&libraries=visualization&callback=initMap">
     </script>
+<br/>
+<br/>
+<a href="/chart"><--Back To Chart Selection</a>
   </body>
 </html>
 {% endblock %}
